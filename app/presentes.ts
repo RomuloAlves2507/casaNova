@@ -1,9 +1,7 @@
-// app/presentes.ts
-
 export const LISTA_PRESENTES = [
   { 
     id: 1, 
-    nome: "Air Fryer Mondial", 
+    nome: "Air Fryer para nossas receitas", 
     preco: 450.00, 
     imagem: "https://m.media-amazon.com/images/I/618geS6p6fL._AC_SL1500_.jpg" 
   },
@@ -24,11 +22,5 @@ export const LISTA_PRESENTES = [
     nome: "Aspirador de Pó Robô", 
     preco: 650.00, 
     imagem: "https://m.media-amazon.com/images/I/51n8pE-jV9L._AC_SL1000_.jpg" 
-  },
-  { 
-    id: 5, 
-    nome: "Jogo de Toalhas Banho", 
-    preco: 150.00, 
-    imagem: "https://m.media-amazon.com/images/I/81+CunD0kSL._AC_SL1500_.jpg" 
   }
 ];
