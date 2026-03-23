@@ -89,7 +89,7 @@ export default function ListaPresentes() {
         {/* Rodapé Simples */}
         <footer className="mt-20 text-center text-gray-400 text-sm">
           <p>Feito com ❤️ para nossa nova jornada.</p>
-        </footer> {/* Mudei aqui de </div> para </footer> */}
+        </div>
       </div>
     </main>
   );
