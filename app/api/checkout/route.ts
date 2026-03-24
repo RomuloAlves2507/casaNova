@@ -30,7 +30,7 @@ export async function POST(request: Request) {
 
     return Response.json({ url: preference.init_point });
     
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("ERRO MERCADO PAGO:", error);
     return Response.json({ error: "Erro ao gerar pagamento" }, { status: 500 });
   }

@@ -22,5 +22,11 @@ export const LISTA_PRESENTES = [
     nome: "Aspirador de Pó Robô", 
     preco: 650.00, 
     imagem: "https://m.media-amazon.com/images/I/51n8pE-jV9L._AC_SL1000_.jpg" 
+  },
+  { 
+    id: 5, 
+    nome: "Paçoca", 
+    preco: 1.00, 
+    imagem: "https://static3.tcdn.com.br/img/img_prod/388802/pacoca_de_amendoim_pacoquita_big_900g_santa_helena_34115_3_ae75d974035a0e27f14a03b127bfcecd.jpg" 
   }
 ];
