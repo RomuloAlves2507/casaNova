@@ -3,13 +3,13 @@ export const LISTA_PRESENTES = [
     id: 1, 
     nome: "Air Fryer para nossas receitas", 
     preco: 450.00, 
-    imagem: "https://m.media-amazon.com/images/I/618geS6p6fL._AC_SL1500_.jpg" 
+    imagem: "https://m.media-amazon.com/images/I/51G4AxVAJxL._AC_SX679_.jpg" 
   },
   { 
     id: 2, 
     nome: "Jogo de Jantar 20 Peças", 
     preco: 280.00, 
-    imagem: "https://m.media-amazon.com/images/I/61-m5N6v6fL._AC_SL1000_.jpg" 
+    imagem: "https://m.media-amazon.com/images/I/51HjUseflNS._AC_SX679_.jpg" 
   },
   { 
     id: 3, 
@@ -21,7 +21,7 @@ export const LISTA_PRESENTES = [
     id: 4, 
     nome: "Aspirador de Pó Robô", 
     preco: 650.00, 
-    imagem: "https://m.media-amazon.com/images/I/51n8pE-jV9L._AC_SL1000_.jpg" 
+    imagem: "https://m.magazineluiza.com.br/a-static/420x420/robo-aspirador-de-po-wap-robot-w310-preto-bivolt/123comprou/m-12666-x1/ae839d8e306e0025d015af58c6237b64.jpeg" 
   },
   { 
     id: 5, 
