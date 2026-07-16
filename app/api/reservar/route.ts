@@ -22,7 +22,7 @@ export async function POST(request: Request) {
       'Produto_Ganho': produtoNome,
       'Nome': nome,
       'Telefone': telefone,
-      'Forma_Entrega': metodo === 'MercadoPago' ? 'Online (Mercado Pago)' : 'Em mãos / Já comprado',
+      'Forma_Entrega': metodo === 'Pix' ? 'Pix' : (metodo === 'MercadoPago' ? 'Crédito' : 'Em mãos / Já comprado'),
       'Data': new Date().toLocaleString('pt-BR'),
       'Valor_Total': valorTotal
     });

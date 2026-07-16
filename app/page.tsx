@@ -92,7 +92,7 @@ export default function Home() {
         
         setTimeout(() => {
           window.location.reload();
-        }, 5000);
+        }, 15000);
 
       } else {
         setModalAberto(false);
@@ -100,7 +100,7 @@ export default function Home() {
         
         setTimeout(() => {
           window.location.reload(); 
-        }, 5000);
+        }, 15000);
       }
     } catch (error) {
       alert("Erro ao processar. Tente novamente ou nos avise!");
@@ -293,7 +293,7 @@ export default function Home() {
         </footer>
       </div>
 
-      {/* --- AVISO DE SUCESSO CUSTOMIZADO --- */}
+      {/*AVISO DE SUCESSO*/}
       {tipoSucesso && (
         <div className="fixed top-10 left-1/2 transform -translate-x-1/2 z-[200] bg-[#F0FFF0] border border-[#191970]/20 p-6 rounded-3xl shadow-2xl w-11/12 max-w-md animate-in slide-in-from-top-10 fade-in duration-500 text-center text-[#191970]">
           {tipoSucesso === 'pix' ? (
