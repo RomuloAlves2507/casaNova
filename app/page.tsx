@@ -121,7 +121,15 @@ export default function Home() {
           </div>
           <h1 className="text-5xl md:text-6xl font-serif font-bold text-[#191970] mb-4">Romulo & Déborah</h1>
           <p className="text-lg text-[#191970]/70 italic">"Escolha um item para nos ajudar a construir nosso novo lar."</p>
+        
+          {/* Contador de Dias até 20/11/2026 */}
+          <div className="text-center mt-6">
+            <p className="text-lg text-[#191970]">Faltam {(Math.max(0, Math.ceil((new Date('2026-11-20').getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))))} dias para nosso chá!</p>
+          </div>
+        
         </header>
+
+
 
         {/* FILTROS */}
         <div className="flex flex-col md:flex-row gap-4 mb-12 bg-[#F0FFF0]/50 p-6 rounded-3xl border border-[#191970]/5 backdrop-blur-sm">
@@ -145,7 +153,7 @@ export default function Home() {
         {carregando ? (
           <div className="text-center py-20 animate-pulse text-xl">Preparando a lista... 🏠</div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
             {presentesFiltrados.map((item) => {
               const isReservado = item.status.toLowerCase() === 'reservado';
               const isCota = item.status.toLowerCase() === 'cota';
@@ -161,14 +169,14 @@ export default function Home() {
                     )}
                   </div>
 
-                  <div className="p-8 flex flex-col flex-grow text-center">
-                    <h3 className={`text-lg font-semibold mb-3 min-h-[3rem] ${isReservado ? 'text-gray-500' : 'text-[#191970]'}`}>{item.nome}</h3>
+                  <div className="p-4 sm:p-8 flex flex-col flex-grow text-center">
+                    <h3 className={`text-base sm:text-lg font-semibold mb-1 sm:mb-3 min-h-[2rem] sm:min-h-[3rem] flex items-center justify-center ${isReservado ? 'text-gray-500' : 'text-[#191970]'}`}>{item.nome}</h3>
                     <div className="mt-auto">
-                      <p className={`text-2xl font-bold mb-5 ${isReservado ? 'text-gray-400' : 'text-[#191970]'}`}>R$ {item.preco.toFixed(2)}</p>
+                      <p className={`text-lg sm:text-2xl font-bold mb-1 sm:mb-3 ${isReservado ? 'text-gray-400' : 'text-[#191970]'}`}>R$ {item.preco.toFixed(2)}</p>
                       <button 
                         disabled={isReservado}
                         onClick={() => abrirModalReserva(item)}
-                        className={`w-full py-4 rounded-2xl font-bold transition-all ${
+                        className={`w-full py-2 sm:py-4 text-sm sm:text-base rounded-xl sm:rounded-2xl font-bold transition-all ${
                           isReservado ? 'bg-gray-300 text-gray-500' : 'bg-[#191970] text-white hover:bg-[#191970]/90 shadow-md'
                         }`}
                       >
