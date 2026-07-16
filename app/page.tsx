@@ -25,6 +25,7 @@ export default function Home() {
   const [quantidadeCota, setQuantidadeCota] = useState(1);
   const [enviando, setEnviando] = useState(false);
   const [formaPagamento, setFormaPagamento] = useState<'pix' | 'credito'>('pix');
+  const [tipoSucesso, setTipoSucesso] = useState<'pix' | 'pessoalmente' | null>(null);
 
   // --- BUSCA DADOS DA PLANILHA ---
   useEffect(() => {
@@ -85,13 +86,21 @@ export default function Home() {
         } catch (err) {
           console.error("Erro ao copiar chave", err);
         }
-        alert(`Chave PIX copiada com sucesso!\n\nTudo certo, ${nomeConvidado.split(' ')[0]}! Reserva confirmada. Muito obrigado! ❤️`);
+        
         setModalAberto(false);
-        window.location.reload();
+        setTipoSucesso('pix'); // Abre o aviso do PIX
+        
+        setTimeout(() => {
+          window.location.reload();
+        }, 5000);
+
       } else {
-        alert(`Tudo certo, ${nomeConvidado.split(' ')[0]}! Reserva confirmada. Muito obrigado! ❤️`);
         setModalAberto(false);
-        window.location.reload(); 
+        setTipoSucesso('pessoalmente'); // Abre o aviso geral
+        
+        setTimeout(() => {
+          window.location.reload(); 
+        }, 5000);
       }
     } catch (error) {
       alert("Erro ao processar. Tente novamente ou nos avise!");
@@ -283,6 +292,35 @@ export default function Home() {
           Feito com ❤️ para nossa nova jornada
         </footer>
       </div>
+
+      {/* --- AVISO DE SUCESSO CUSTOMIZADO --- */}
+      {tipoSucesso && (
+        <div className="fixed top-10 left-1/2 transform -translate-x-1/2 z-[200] bg-[#F0FFF0] border border-[#191970]/20 p-6 rounded-3xl shadow-2xl w-11/12 max-w-md animate-in slide-in-from-top-10 fade-in duration-500 text-center text-[#191970]">
+          {tipoSucesso === 'pix' ? (
+            <>
+              <div className="text-4xl mb-3">📋</div>
+              <h3 className="text-2xl font-bold mb-2">Chave copiada!</h3>
+              <p className="text-lg mb-4">
+                Agora é só entrar no seu aplicativo do banco e colar a chave para efetivar o envio.
+              </p>
+              <p className="text-xl font-bold">
+                {nomeConvidado.split(' ')[0]}, muito obrigado! ❤️
+              </p>
+            </>
+          ) : (
+            <>
+              <div className="text-4xl mb-3">🎉</div>
+              <h3 className="text-2xl font-bold mb-2">Tudo certo!</h3>
+              <p className="text-lg mb-4">
+                Sua reserva foi confirmada com sucesso.
+              </p>
+              <p className="text-xl font-bold">
+                {nomeConvidado.split(' ')[0]}, muito obrigado! ❤️
+              </p>
+            </>
+          )}
+        </div>
+      )}
     </main>
   );
 }
