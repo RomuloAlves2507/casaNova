@@ -24,6 +24,7 @@ export default function Home() {
   const [telefoneConvidado, setTelefoneConvidado] = useState('');
   const [quantidadeCota, setQuantidadeCota] = useState(1);
   const [enviando, setEnviando] = useState(false);
+  const [formaPagamento, setFormaPagamento] = useState<'pix' | 'credito'>('pix');
 
   // --- BUSCA DADOS DA PLANILHA ---
   useEffect(() => {
@@ -48,7 +49,7 @@ export default function Home() {
     setModalAberto(true);
   };
 
-  const finalizarReserva = async (metodo: 'MercadoPago' | 'Pessoalmente') => {
+  const finalizarReserva = async (metodo: 'MercadoPago' | 'Pessoalmente' | 'Pix') => {
     if (!nomeConvidado || !telefoneConvidado) {
       alert("Por favor, preencha seu nome e telefone para que possamos te agradecer!");
       return;
@@ -77,6 +78,16 @@ export default function Home() {
 
       if (metodo === 'MercadoPago' && data.url) {
         window.location.assign(data.url);
+      } else if (metodo === 'Pix') {
+        // Tenta copiar a chave para a área de transferência do usuário
+        try {
+          await navigator.clipboard.writeText('092da9da-6624-41a4-bf05-43b1ea7a1ce7');
+        } catch (err) {
+          console.error("Erro ao copiar chave", err);
+        }
+        alert(`Chave PIX copiada com sucesso!\n\nTudo certo, ${nomeConvidado.split(' ')[0]}! Reserva confirmada. Muito obrigado! ❤️`);
+        setModalAberto(false);
+        window.location.reload();
       } else {
         alert(`Tudo certo, ${nomeConvidado.split(' ')[0]}! Reserva confirmada. Muito obrigado! ❤️`);
         setModalAberto(false);
@@ -191,6 +202,7 @@ export default function Home() {
         )}
 
         {/* --- MODAL DE RESERVA --- */}
+        {/* --- MODAL DE RESERVA --- */}
         {modalAberto && (
           <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-[#191970]/40 backdrop-blur-md">
             <div className="bg-[#FFFAFA] w-full max-w-md rounded-[2.5rem] p-8 shadow-2xl border border-[#F0FFF0] animate-in fade-in zoom-in duration-300">
@@ -223,19 +235,45 @@ export default function Home() {
               </div>
 
               <div className="mt-8 flex flex-col gap-3">
+                {/* --- SELEÇÃO DE PAGAMENTO --- */}
+                <div className="flex bg-[#191970]/5 p-1 rounded-xl mb-2">
+                  <button 
+                    onClick={() => setFormaPagamento('pix')}
+                    className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all ${formaPagamento === 'pix' ? 'bg-[#191970] text-white shadow-md' : 'text-[#191970]/60 hover:text-[#191970]'}`}
+                  >
+                    PIX
+                  </button>
+                  <button 
+                    onClick={() => setFormaPagamento('credito')}
+                    className={`flex-1 py-2 rounded-lg text-sm font-bold transition-all ${formaPagamento === 'credito' ? 'bg-[#191970] text-white shadow-md' : 'text-[#191970]/60 hover:text-[#191970]'}`}
+                  >
+                    Crédito
+                  </button>
+                </div>
+
+                {/* --- BOTÕES DE AÇÃO --- */}
                 <button 
-                  disabled={enviando} onClick={() => finalizarReserva('MercadoPago')}
-                  className="bg-[#191970] text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2"
+                  disabled={enviando} 
+                  onClick={() => finalizarReserva(formaPagamento === 'pix' ? 'Pix' : 'MercadoPago')}
+                  className="bg-[#191970] text-white py-4 rounded-2xl font-bold flex items-center justify-center gap-2 transition-all hover:bg-[#191970]/90"
                 >
-                  {enviando ? 'Processando...' : `Pagar R$ ${(itemSelecionado!.preco * quantidadeCota).toFixed(2)} Online`}
+                  {enviando ? 'Processando...' : 
+                    formaPagamento === 'pix' 
+                    ? `Copiar Chave PIX (R$ ${(itemSelecionado!.preco * quantidadeCota).toFixed(2)})` 
+                    : `Enviar R$ ${(itemSelecionado!.preco * quantidadeCota).toFixed(2)}`
+                  }
                 </button>
+                
                 <button 
                   disabled={enviando} onClick={() => finalizarReserva('Pessoalmente')}
-                  className="bg-[#F0FFF0] text-[#191970] py-4 rounded-2xl font-bold border border-[#191970]/10"
+                  className="bg-[#F0FFF0] text-[#191970] py-4 rounded-2xl font-bold border border-[#191970]/10 hover:bg-[#191970]/5 transition-all"
                 >
                   Vou entregar em mãos
                 </button>
-                <button onClick={() => setModalAberto(false)} className="text-[#191970]/40 text-xs mt-2 underline">Cancelar</button>
+                
+                <button onClick={() => setModalAberto(false)} className="text-[#191970]/40 hover:text-[#191970] text-xs mt-2 underline transition-colors">
+                  Cancelar
+                </button>
               </div>
             </div>
           </div>
